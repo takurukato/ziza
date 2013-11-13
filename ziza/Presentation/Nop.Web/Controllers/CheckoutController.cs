@@ -478,10 +478,10 @@ namespace Nop.Web.Controllers
 
             //model
             var model = PrepareBillingAddressModel();
-            //return View(model);
+            return View(model);
 
             // add by van le
-            return RedirectToAction("SelectBillingAddress", new { addressId = model.ExistingAddresses.First().Id }); 
+            //return RedirectToAction("SelectBillingAddress", new { addressId = model.ExistingAddresses.First().Id }); 
         }
         public ActionResult SelectBillingAddress(int addressId)
         {
@@ -570,7 +570,9 @@ namespace Nop.Web.Controllers
             _workContext.CurrentCustomer.ShippingAddress = address;
             _customerService.UpdateCustomer(_workContext.CurrentCustomer);
 
-            return RedirectToRoute("CheckoutShippingMethod");
+            //return RedirectToRoute("CheckoutShippingMethod");
+            return RedirectToRoute("CheckoutPaymentMethod");
+            
         }
         [HttpPost, ActionName("ShippingAddress")]
         [FormValueRequired("nextstep")]
@@ -594,7 +596,8 @@ namespace Nop.Web.Controllers
             {
                 _workContext.CurrentCustomer.ShippingAddress = null;
                 _customerService.UpdateCustomer(_workContext.CurrentCustomer);
-                return RedirectToRoute("CheckoutShippingMethod");
+                //return RedirectToRoute("CheckoutShippingMethod");
+                return RedirectToRoute("CheckoutPaymentMethod");
             }
 
             if (ModelState.IsValid)
@@ -610,7 +613,8 @@ namespace Nop.Web.Controllers
                 _workContext.CurrentCustomer.ShippingAddress = address;
                 _customerService.UpdateCustomer(_workContext.CurrentCustomer);
 
-                return RedirectToRoute("CheckoutShippingMethod");
+                //return RedirectToRoute("CheckoutShippingMethod");
+                return RedirectToRoute("CheckoutPaymentMethod");
             }
 
 
